@@ -1,10 +1,16 @@
 #include <iostream>
 using namespace std;
-struct Node
-        {
+
+class trieNode;
+class LinkedList;
+struct Node{
+
     char character;
+    trieNode *nextChild;
     Node *next;
-        };
+
+};
+
 class LinkedList{
 private:
     Node* head ,* tail;
@@ -15,19 +21,9 @@ public:
         this->head=nullptr;
         this->tail=nullptr;
     }
-    
 
-    void printList()
-    {
-        Node *tmp= this->head;
-        while (tmp != this->tail)
-        {
-           cout<<tmp->character<<" ";
-           tmp=tmp->next;
-        }
-        cout<<tmp->character;
-        cout<<endl;
-    }
+
+
     void push_back(char value)
     {
         Node*tmp=new Node();
@@ -44,16 +40,45 @@ public:
             this->tail->next=tmp;
             this->tail=tmp;
         }
+
     }
-        };
+    void printList()
+    {
+        Node *tmp= this->head;
+        while (tmp != this->tail)
+        {
+            cout<<tmp->character;
+            tmp=tmp->next;
+        }
+        cout<<tmp->character;
+        cout<<endl;
+    }
+};
+
+class trieNode
+{
+public:
+    LinkedList *list;
+    int index;
+
+    trieNode()
+    {
+        list=new LinkedList();
+        index = 0;
+    }
+
+};
+
+
+
 int main() {
-    LinkedList *list=new LinkedList();
-    list->push_back('a');
-    list->push_back('h');
-    list->push_back('m');
-    list->push_back('e');
-    list->push_back('d');
-    list->printList();
+    trieNode *tn=new trieNode();
+    tn->list->push_back('a');
+    tn->list->push_back('h');
+    tn->list->push_back('m');
+    tn->list->push_back('e');
+    tn->list->push_back('d');
+    tn->list->printList();
 
     return 0;
 }
